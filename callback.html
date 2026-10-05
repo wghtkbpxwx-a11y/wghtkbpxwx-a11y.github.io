@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bVM3tTcxdXaCoMs/gZro33goHyS/MYQk3iCWP25LoHI='; style-src 'unsafe-inline'">
+<title>Tesla sign-in code</title></head>
+<body style="font-family:system-ui,sans-serif;max-width:40em;margin:3em auto;padding:0 1em">
+<h1>Tesla sign-in code</h1>
+<p id="msg">Copy the code below and give it to Grok Bot. It expires in a few minutes and works once.</p>
+<textarea id="code" readonly rows="4" style="width:100%;font-family:monospace;font-size:1em"></textarea>
+<p id="extra"></p>
+<script>
+(function(){var p=new URLSearchParams(location.search);var c=p.get('code'),e=p.get('error'),s=p.get('state');
+var t=document.getElementById('code');if(c){t.value=c;t.focus();t.select();}
+else{document.getElementById('msg').textContent=e?('Tesla returned an error: '+e+' '+(p.get('error_description')||'')):'No code in this URL.';}
+if(s){document.getElementById('extra').textContent='state: '+s;}})();
+</script>
+</body></html>
