@@ -1,17 +1,19 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bVM3tTcxdXaCoMs/gZro33goHyS/MYQk3iCWP25LoHI='; style-src 'unsafe-inline'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yDtOOZsQJb2nAw2H/Vw0Oi+SpcWF80UaG86mlgHKixo='; style-src 'unsafe-inline'">
 <title>Tesla sign-in code</title></head>
 <body style="font-family:system-ui,sans-serif;max-width:40em;margin:3em auto;padding:0 1em">
 <h1>Tesla sign-in code</h1>
 <p id="msg">Copy the code below and give it to Grok Bot. It expires in a few minutes and works once.</p>
-<textarea id="code" readonly rows="4" style="width:100%;font-family:monospace;font-size:1em"></textarea>
-<p id="extra"></p>
-<script>
-(function(){var p=new URLSearchParams(location.search);var c=p.get('code'),e=p.get('error'),s=p.get('state');
-var t=document.getElementById('code');if(c){t.value=c;t.focus();t.select();}
-else{document.getElementById('msg').textContent=e?('Tesla returned an error: '+e+' '+(p.get('error_description')||'')):'No code in this URL.';}
-if(s){document.getElementById('extra').textContent='state: '+s;}})();
-</script>
+<textarea id="code" readonly rows="5" style="width:100%;font-family:monospace;font-size:1.3em;padding:.5em;border:2px solid #333;border-radius:6px"></textarea>
+<p><button id="copy" type="button" style="display:none;font-size:1.2em;padding:.5em 1.5em">Copy code</button></p>
+<p id="extra" style="color:#666;font-size:.9em"></p>
+<script>(function(){var p=new URLSearchParams(location.search);var c=p.get('code'),e=p.get('error'),s=p.get('state');
+var t=document.getElementById('code'),b=document.getElementById('copy'),m=document.getElementById('msg');
+if(c){t.value=c;t.focus();t.select();b.style.display='inline-block';
+b.addEventListener('click',function(){t.select();var ok=function(){b.textContent='Copied';};
+if(navigator.clipboard){navigator.clipboard.writeText(c).then(ok,function(){document.execCommand('copy');ok();});}else{document.execCommand('copy');ok();}});}
+else{t.style.display='none';m.textContent=e?('Tesla returned an error: '+e+' '+(p.get('error_description')||'')):'No code in this URL.';}
+if(s){document.getElementById('extra').textContent='state: '+s;}})();</script>
 </body></html>
